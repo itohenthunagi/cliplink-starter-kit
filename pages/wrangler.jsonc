@@ -1,0 +1,18 @@
+// 共有ゲートウェイをCloudflare Pagesで公開するための設定（URLにアカウント名が入らない <project>.pages.dev）。
+// 中身はWorkerと同じプログラムで、scripts/cloud-pages.ts が ./dist/_worker.js へ組み立ててから公開する。
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "cliplink",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-09-01",
+  // STORAGE_PROVIDER: 画像の保管先。"dropbox"（既定）か "r2"（npm run setup:cloudflare が r2_buckets と一緒に設定する）。
+  "vars": { "APP_NAME": "Cliplink", "STORAGE_PROVIDER": "dropbox" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cliplink",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "../migrations",
+    },
+  ],
+}

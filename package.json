@@ -1,0 +1,43 @@
+{
+  "name": "cliplink",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "npm run build && tsx watch src/server/main.ts",
+    "start": "tsx src/server/main.ts",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "check": "npm test && npm run build && npm run test:e2e",
+    "worker:dev": "wrangler dev",
+    "worker:check": "wrangler deploy --dry-run --outdir tmp/worker",
+    "worker:deploy": "wrangler deploy",
+    "worker:migrate:local": "wrangler d1 migrations apply cliplink --local",
+    "capture:web": "tsx scripts/capture-web.ts",
+    "import": "tsx scripts/import.ts",
+    "setup:dropbox": "tsx scripts/setup-dropbox.ts",
+    "setup:google": "tsx scripts/setup-google.ts",
+    "setup:cloudflare": "tsx scripts/setup-cloudflare.ts",
+    "kit:doctor": "tsx scripts/doctor.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.1",
+    "dotenv": "^18.0.2",
+    "hono": "^4.13.8",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260922.1",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.4",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.3",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.136.1"
+  }
+}

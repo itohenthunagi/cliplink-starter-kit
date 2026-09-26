@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cliplink",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  // 公開は pages/ のCloudflare Pages（<project>.pages.dev）で行う。workers.devのURLはアカウント名を含むため止める。
+  // このWorker設定は、Pages用プログラムの組み立て（--dry-run）と旧URL停止のために残す。
+  "workers_dev": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cliplink",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "observability": { "enabled": false },
+}
